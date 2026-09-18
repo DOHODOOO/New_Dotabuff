@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Топ-5 Героев Dotabuff</title>
+    <style>
+        body { font-family: sans-serif; background: #1c242d; color: #fff; padding: 40px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .item-box { background: #242f39; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #4caf50; }
+        .hero-name { font-weight: bold; color: #e5e5e5; font-size: 1.1em; }
+        .winrate-val { color: #4caf50; font-size: 1.1em; font-weight: bold; }
+        h1 { font-size: 20px; color: #a3b0be; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Топ-5 героев по винрейту на Crusader (7 дней)</h1>
+        <p>Источник: <a href="{{ url }}" style="color: #64b5f6;" target="_blank">Dotabuff</a></p>
+
+        {% if items %}
+            {% for item in items %}
+                <div style="display: flex; align-items: center; margin-bottom: 15px; background: #222; padding: 10px; border-radius: 6px; color: #fff;">
+                    <span style="font-weight: bold; margin-right: 15px; font-size: 1.2em;">#{{ loop.index }}</span>
+
+                    <!-- Проверьте эту строку: src должен строго ссылаться на item.image -->
+                    <img src="{{ item.image }}" alt="{{ item.hero }}" style="width: 70px; height: auto; border-radius: 4px; margin-right: 15px; display: block;">
+
+                    <div>
+                        <strong style="font-size: 1.3em; display: block; margin-bottom: 2px;">{{ item.hero }}</strong>
+                        <span style="color: #4CAF50; font-weight: bold;">Винрейт: {{ item.winrate }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Список героев пуст.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
